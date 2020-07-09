@@ -80,6 +80,8 @@ class AsyncMqttClient {
 
   const char* getClientId();
 
+  AsyncClient &getAsyncClient();
+
  private:
   AsyncClient _client;
 
@@ -91,7 +93,7 @@ class AsyncMqttClient {
   uint32_t _lastServerActivity;
   uint32_t _lastPingRequestTime;
 
-  char _generatedClientId[18 + 1];  // esp8266-abc123 and esp32-abcdef123456 
+  char _generatedClientId[18 + 1];  // esp8266-abc123 and esp32-abcdef123456
   IPAddress _ip;
   const char* _host;
   bool _useIp;

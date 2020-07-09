@@ -321,7 +321,7 @@ void AsyncMqttClient::_onConnect(AsyncClient* client) {
   sendbuffer[3] = 'Q';
   sendbuffer[4] = 'T';
   sendbuffer[5] = 'T';
-  
+
   sendbuffer[6] = protocolLevel[0];
   sendbuffer[7] = connectFlags[0];
   sendbuffer[8] = keepAliveBytes[0];
@@ -893,3 +893,9 @@ uint16_t AsyncMqttClient::publish(const char* topic, uint8_t qos, bool retain, c
 const char* AsyncMqttClient::getClientId() {
   return _clientId;
 }
+
+AsyncClient &AsyncMqttClient::getAsyncClient() {
+  return _client;
+}
+
+
