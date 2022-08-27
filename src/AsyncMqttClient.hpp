@@ -84,6 +84,8 @@ class AsyncMqttClient {
   bool clearQueue();  // Not MQTT compliant!
 
   const char* getClientId() const;
+  
+  AsyncClient &getAsyncClient();
 
  private:
   AsyncClient _client;
@@ -177,3 +179,8 @@ class AsyncMqttClient {
 
   void _sendPing();
 };
+
+inline AsyncClient &AsyncMqttClient::getAsyncClient()
+{
+  return _client;
+}
