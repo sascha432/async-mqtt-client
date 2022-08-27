@@ -54,7 +54,7 @@ AsyncMqttClient::AsyncMqttClient()
   sprintf(_generatedClientId, "esp32-%06llx", ESP.getEfuseMac());
   _xSemaphore = xSemaphoreCreateMutex();
 #elif defined(ESP8266)
-  sprintf(_generatedClientId, "esp8266-%06x", ESP.getChipId());
+  snprintf_P(_generatedClientId, sizeof(_generatedClientId), PSTR("esp8266-%06x"), ESP.getChipId());
 #endif
   _clientId = _generatedClientId;
 
@@ -451,7 +451,7 @@ void AsyncMqttClient::_clearQueue(bool keepSessionData) {
      *  - QoS 1 and QoS 2 messages which have been sent to the Server, but have not been completely acknowledged.
      *  - QoS 2 messages which have been received from the Server, but have not been completely acknowledged.
      * + (unsent PUB messages with QoS > 0)
-     * 
+     *
      * To be kept:
      * - possibly first message (sent to server but not acked)
      * - PUBREC messages (QoS 2 PUB received but not acked)
