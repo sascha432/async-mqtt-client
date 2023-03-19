@@ -83,8 +83,9 @@ class AsyncMqttClient {
   uint16_t publish(const char* topic, uint8_t qos, bool retain, const char* payload = nullptr, size_t length = 0, bool dup = false, uint16_t message_id = 0);
   bool clearQueue();  // Not MQTT compliant!
 
+  char* getClientId(size_t &length);
   const char* getClientId() const;
-  
+
   AsyncClient &getAsyncClient();
 
  private:
