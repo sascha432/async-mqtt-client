@@ -1,8 +1,23 @@
 #pragma once
 
+#include <string.h>
+
 namespace AsyncMqttClientInternals {
 class Helpers {
  public:
+  static void appendProgmemDataToVector(std::vector<uint8_t> &vector, const void *data, size_t size) {
+    if (!data || !size) {
+        return;
+    }
+    auto dst = vector.data() + vector.size();
+    vector.resize(vector.size() + size);
+    #if ESP8266
+        memmove_P(dst, data, size);
+    #else
+        memmove(dst, data, size);
+    #endif
+
+  }
   static uint32_t decodeRemainingLength(char* bytes) {
     uint32_t multiplier = 1;
     uint32_t value = 0;

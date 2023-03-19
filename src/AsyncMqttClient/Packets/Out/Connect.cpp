@@ -64,7 +64,7 @@ ConnectOutPacket::ConnectOutPacket(bool cleanSession,
     willTopicLengthBytes[0] = willTopicLength >> 8;
     willTopicLengthBytes[1] = willTopicLength & 0xFF;
 
-    if (willPayload != nullptr && willPayloadLength == 0) willPayloadLength = strlen(willPayload);
+    if (willPayload != nullptr && willPayloadLength == 0) willPayloadLength = strlen_P(willPayload);
 
     willPayloadLengthBytes[0] = willPayloadLength >> 8;
     willPayloadLengthBytes[1] = willPayloadLength & 0xFF;
@@ -141,7 +141,7 @@ ConnectOutPacket::ConnectOutPacket(bool cleanSession,
     _data.insert(_data.end(), willTopic, willTopic + willTopicLength);
 
     _data.insert(_data.end(), willPayloadLengthBytes, willPayloadLengthBytes + 2);
-    if (willPayload != nullptr) _data.insert(_data.end(), willPayload, willPayload + willPayloadLength);
+    AsyncMqttClientInternals::Helpers::appendProgmemDataToVector(_data, willPayload, willPayloadLength);
   }
   if (username != nullptr) {
     _data.insert(_data.end(), usernameLengthBytes, usernameLengthBytes + 2);
