@@ -750,6 +750,11 @@ bool AsyncMqttClient::clearQueue() {
   return true;
 }
 
+char *AsyncMqttClient::getClientId(size_t &length) {
+  length = sizeof(_generatedClientId);
+  return _generatedClientId;
+}
+
 const char* AsyncMqttClient::getClientId() const {
   return _clientId;
 }
