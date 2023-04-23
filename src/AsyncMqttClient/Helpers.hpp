@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string.h>
+#include <vector>
 
 namespace AsyncMqttClientInternals {
 class Helpers {

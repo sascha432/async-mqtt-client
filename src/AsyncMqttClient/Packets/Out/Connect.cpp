@@ -1,5 +1,9 @@
 #include "Connect.hpp"
 
+#if ESP32
+#define strlen_P strlen
+#endif
+
 using AsyncMqttClientInternals::ConnectOutPacket;
 
 ConnectOutPacket::ConnectOutPacket(bool cleanSession,

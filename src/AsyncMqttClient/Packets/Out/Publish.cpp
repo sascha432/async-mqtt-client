@@ -1,5 +1,9 @@
 #include "Publish.hpp"
 
+#if ESP32
+#define strlen_P strlen
+#endif
+
 using AsyncMqttClientInternals::PublishOutPacket;
 
 PublishOutPacket::PublishOutPacket(const char* topic, uint8_t qos, bool retain, const char* payload, size_t length) {
